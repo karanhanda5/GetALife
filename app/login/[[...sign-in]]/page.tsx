@@ -10,7 +10,7 @@ export default function LoginPage() {
           3 challenges a day. That&apos;s all it takes.
         </p>
       </div>
-      <SignIn routing="path" path="/login" />
+      <SignIn routing="path" path="/login" fallbackRedirectUrl="/dashboard" />
     </div>
   );
 }
