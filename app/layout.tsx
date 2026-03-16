@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import Nav from "@/components/Nav";
+import Header from "@/components/Header";
+import MainContent from "@/components/MainContent";
 
 export const metadata: Metadata = {
   title: "GetALife — Daily Real-Life Micro Challenges",
@@ -23,11 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <html lang="en">
         <body className="min-h-screen flex flex-col">
+          <Header />
           <Nav />
-          {/* pb-28 leaves room for the fixed bottom nav; pt-safe covers notch on iOS */}
-          <main className="flex-1 w-full max-w-md mx-auto px-4 pb-32 pt-6">
-            {children}
-          </main>
+          <MainContent>{children}</MainContent>
         </body>
       </html>
     </ClerkProvider>

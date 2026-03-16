@@ -8,9 +8,8 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Prevent horizontal scroll on mobile */
-    overflow-x: hidden;
-    /* Smooth scroll */
+    /* NOTE: no overflow-x:hidden here — it disables touch-scroll on iOS Safari
+       when combined with overflow-x:hidden on body. Body handles horizontal clip. */
     scroll-behavior: smooth;
   }
   body {
