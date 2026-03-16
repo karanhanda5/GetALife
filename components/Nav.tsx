@@ -17,16 +17,17 @@ export default function Nav() {
   if (!isLoaded || !isSignedIn || path === "/" || path.startsWith("/login")) return null;
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50 bg-white/80 backdrop-blur-xl border-t border-sand-200">
-      <div className="max-w-lg mx-auto flex justify-around py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+    <nav className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur-xl border-t border-sand-200"
+         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+      <div className="max-w-md mx-auto flex justify-around pt-2 pb-2">
         {tabs.map((tab) => {
           const active = path.startsWith(tab.href);
           return (
             <Link
               key={tab.href}
               href={tab.href}
-              className={`flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-2xl transition-colors ${
-                active ? "text-moss-600 bg-moss-50" : "text-sand-400 hover:text-bark"
+              className={`flex flex-col items-center gap-0.5 px-6 py-2 rounded-2xl transition-colors min-w-[64px] ${
+                active ? "text-moss-600 bg-moss-50" : "text-sand-400"
               }`}
             >
               <tab.icon className="w-6 h-6" />

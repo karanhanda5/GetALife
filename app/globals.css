@@ -8,9 +8,28 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Smooth scroll */
+    scroll-behavior: smooth;
   }
   body {
     @apply font-body text-bark bg-cream;
+    overflow-x: hidden;
+    /* Prevent iOS elastic scroll on body */
+    overscroll-behavior-y: none;
+  }
+  /* Prevent iOS zoom on input focus — keep font-size >= 16px */
+  input, textarea, select {
+    font-size: 16px;
+  }
+  /* Remove tap highlight on mobile */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* All buttons get touch-action manipulation (removes 300ms click delay) */
+  button, a {
+    touch-action: manipulation;
   }
 }
 
@@ -25,10 +44,15 @@
     @apply bg-coral-100 text-coral-500 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider;
   }
   .card {
-    @apply bg-white rounded-3xl shadow-soft p-6 transition-all duration-200;
+    /* Slightly less padding on small phones */
+    @apply bg-white rounded-3xl shadow-soft p-4 sm:p-6 transition-all duration-200;
   }
   .card:hover {
     @apply shadow-card;
+  }
+  /* Ensure minimum tap target height on all interactive elements */
+  button {
+    min-height: 44px;
   }
 }
 

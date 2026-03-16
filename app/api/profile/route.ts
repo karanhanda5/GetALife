@@ -7,7 +7,10 @@ export async function GET() {
   if (!userId) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
 
   const { rows: userRows } = await sql`
-    SELECT name, email, image, current_streak, longest_streak, total_points, created_at
+    SELECT name, email, image, current_streak, longest_streak, total_points,
+           COALESCE(full_streak, 0) AS full_streak,
+           COALESCE(longest_full_streak, 0) AS longest_full_streak,
+           created_at
     FROM users WHERE id = ${userId}`;
 
   if (userRows.length === 0) return NextResponse.json({ error: "User not found" }, { status: 404 });

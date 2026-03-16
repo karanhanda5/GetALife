@@ -19,20 +19,20 @@ export default function LandingPage() {
       <div className="animate-fade-up delay-200 flex flex-col gap-3 w-full max-w-xs">
         <Link
           href="/login"
-          className="bg-bark text-cream rounded-2xl px-6 py-4 text-center font-semibold text-lg hover:bg-night-800 active:scale-[0.97] transition-all duration-150 shadow-card"
+          className="bg-bark text-cream rounded-2xl px-6 py-4 text-center font-semibold text-lg active:scale-[0.97] transition-all duration-150 shadow-card touch-manipulation"
         >
           Start Today
         </Link>
-        <Link href="/leaderboard" className="text-sm text-sand-400 hover:text-bark transition-colors font-medium">
+        <Link href="/leaderboard" className="text-sm text-sand-400 font-medium py-2 text-center touch-manipulation">
           View leaderboard →
         </Link>
       </div>
 
-      <div className="animate-fade-up delay-300 mt-16 grid gap-4 w-full max-w-sm">
+      <div className="animate-fade-up delay-300 mt-12 grid gap-3 w-full max-w-sm">
         {[
-          { emoji: "🎲", text: "Get 3 random real-life challenges each day" },
-          { emoji: "✅", text: "Complete at least 1 to keep your streak alive" },
-          { emoji: "🏆", text: "Earn points, climb the leaderboard, feel alive" },
+          { emoji: "📸", text: "Prove it with a photo — no cheating allowed" },
+          { emoji: "🎲", text: "Fresh challenges every day, never the same week" },
+          { emoji: "🏆", text: "Complete all 3 daily to top the leaderboard" },
         ].map((step, i) => (
           <div key={i} className="flex items-center gap-4 text-left card border border-sand-200 py-4">
             <span className="text-2xl shrink-0">{step.emoji}</span>
