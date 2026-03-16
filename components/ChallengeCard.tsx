@@ -126,6 +126,7 @@ export default function ChallengeCard({
       {/* Completed proof photo */}
       {done && challenge.proof_url && (
         <div className="mb-3 rounded-2xl overflow-hidden border border-moss-200">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={challenge.proof_url}
             alt="Proof photo"
@@ -163,6 +164,7 @@ export default function ChallengeCard({
             /* Photo selected — show preview + confirm */
             <div className="p-3">
               <div className="rounded-xl overflow-hidden mb-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={proofPreview} alt="Preview" className="w-full h-44 object-cover" />
               </div>
               <div className="flex gap-2">

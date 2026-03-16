@@ -30,8 +30,7 @@ export async function POST(req: NextRequest) {
   // Check if all today's challenges are now done
   const { rows: todayAll } = await sql`
     SELECT completed FROM daily_challenges WHERE user_id = ${userId} AND assigned_date = CURRENT_DATE`;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const allDone = todayAll.length > 0 && todayAll.every((r: any) => r.completed);
+  const allDone = todayAll.length > 0 && todayAll.every((r) => Boolean(r["completed"]));
   if (allDone) pointsEarned += 30; // bonus for completing all 3
 
   // ── Full-completion streak (days where ALL 3 challenges were completed) ────
