@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sql } from "@/lib/db";
-import webpush from "web-push";
 
 // Must run in Node.js (web-push uses Node crypto)
 export const runtime = "nodejs";
-
-webpush.setVapidDetails(
-  process.env.VAPID_SUBJECT!,
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
-);
+// Never statically analysed — always runs on-demand
+export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   // Vercel automatically sends: Authorization: Bearer <CRON_SECRET>
@@ -17,6 +12,14 @@ export async function GET(req: NextRequest) {
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+
+  // Lazy-import so web-push never executes at build time
+  const webpush = (await import("web-push")).default;
+  webpush.setVapidDetails(
+    process.env.VAPID_SUBJECT!,
+    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
+    process.env.VAPID_PRIVATE_KEY!
+  );
 
   // Fetch all active push subscriptions
   const { rows: subs } = await sql`
