@@ -3,6 +3,7 @@
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState, useCallback } from "react";
 import ChallengeCard from "@/components/ChallengeCard";
+import NotificationBanner from "@/components/NotificationBanner";
 
 interface Challenge {
   id: number;
@@ -166,6 +167,11 @@ export default function DashboardPage() {
             <ChallengeCard challenge={c} onComplete={handleComplete} />
           </div>
         ))}
+      </div>
+
+      {/* Push notification opt-in */}
+      <div className="animate-fade-up">
+        <NotificationBanner />
       </div>
     </div>
   );

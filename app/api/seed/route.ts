@@ -120,6 +120,17 @@ export async function GET() {
   await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS bio TEXT`;
   await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url TEXT`;
 
+  // Push notification subscriptions
+  await sql`
+    CREATE TABLE IF NOT EXISTS push_subscriptions (
+      id        SERIAL PRIMARY KEY,
+      user_id   TEXT NOT NULL,
+      endpoint  TEXT UNIQUE NOT NULL,
+      p256dh    TEXT NOT NULL,
+      auth      TEXT NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT now()
+    )`;
+
   await sql`CREATE INDEX IF NOT EXISTS idx_dc_user_date ON daily_challenges(user_id, assigned_date)`;
   await sql`CREATE INDEX IF NOT EXISTS idx_users_points ON users(total_points DESC)`;
   await sql`CREATE INDEX IF NOT EXISTS idx_users_full_streak ON users(full_streak DESC)`;
